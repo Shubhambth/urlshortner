@@ -1,0 +1,24 @@
+<!-- templates/shortener/home.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="flex flex-col items-center justify-center min-h-screen">
+    <h1 class="text-3xl font-bold mb-4">URL Shortener</h1>
+    <form method="post" class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md transform transition-all hover:shadow-2xl duration-300">
+        {% csrf_token %}
+        <div class="mb-4">
+            <input type="url" name="url" placeholder="Enter URL to shorten" required
+                   class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-200" />
+        </div>
+        <button type="submit"
+                class="w-full bg-blue-600 text-white font-semibold py-2 rounded-md hover:bg-blue-700 transition duration-200">
+            Shorten
+        </button>
+    </form>
+    {% if short_url %}
+        <p class="mt-4 text-gray-700">Your shortened URL: 
+            <a href="{{ short_url }}" class="text-blue-600 underline hover:text-blue-800">{{ short_url }}</a>
+        </p>
+    {% endif %}
+</div>
+{% endblock %}
